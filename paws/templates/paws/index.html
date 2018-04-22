@@ -1,0 +1,20 @@
+{% if all_paws %}
+    <ul>
+     {%  for paw in all_paws %}
+     <li>
+        Title : {{ paw.title}} <br/>
+        Content : {{paw.content}} <br/>
+        <strong>Likes :</strong> {{paw.number_of_likes}}
+        <strong> Comment :</strong><br/>
+        {% for comment in all_comments%}
+            {% if comment.toPawsId.id == paw.id%}
+               <strong>{{comment.fromUserId}} : </strong> 
+                {{comment.comment_content}} <br/>
+            {%endif%}
+        {%endfor%}
+     </li>
+     {%endfor %}
+    </ul>
+{%else%}
+    <p> There is no Paws</p>
+{%endif%}

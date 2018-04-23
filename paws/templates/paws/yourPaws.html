@@ -1,18 +1,19 @@
 {% extends 'paws/menu.html'%}
 {%block content %}
-    {% if all_paws %}
+    {% if paws %}
      <ul>
-     {%  for paw in all_paws %}
+     {%  for paw in paws %}
      <li>
-        Title : {{ paw.title}} <br/> <small> Author by: {{paw.fromUserId}}</small><br/>
+        Title : {{ paw.title}} 
+        <button type="button" class="btn btn-danger">Remove This Paws</button>
+        <br/> 
+        <small> Author by: {{paw.fromUserId}}</small><br/>
         Content : {{paw.content}} <br/>
         <strong>Number of Likes :</strong> {{paw.number_of_likes}}
         <form action= " {% url 'comment' paw.id %}" method="POST">
             {%csrf_token%}
             <input type="text" placeholder="Your Comment ..." name="comment" >
-            <input type="submit" class="btn btn-outline-primary" name="comment_btn" value="Comment">
-            <input type="submit" class="btn btn-warning" name="follow_btn" value="Follow-Up">
-            <input type="submit" class="btn btn-info" name="like_btn" value="Like">
+            <button type="submit" class="btn btn-outline-primary">Comment</button>
         </form>
         <strong> Comment :</strong><br/>
         {% for comment in all_comments%}

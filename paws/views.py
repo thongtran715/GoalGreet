@@ -106,4 +106,7 @@ def register(request):
     return render(request,'paws/register.html', {'form': form}) 
 
 def follow_Up_View (request):
-    return HttpResponse("Follow")
+    # Check if the user is authenticated 
+    if request.user.is_authenticated:
+        username = request.user.username
+        user = User.objects.get(username=username) 

@@ -1,5 +1,10 @@
 {% extends 'paws/menu.html'%}
 {% block content%}
+
+{% if error%}
+<p style="color: red"> {{error}}</p>
+{%endif%}
+
 <form class="form-horizontal" action="" method='POST'>
     {%csrf_token%}
     <div class="form-group">

@@ -5,7 +5,6 @@
      {%  for paw in paws %}
      <li>
         Title : {{ paw.title}} 
-        <button type="button" class="btn btn-danger">Remove This Paws</button>
         <br/> 
         <small> Author by: {{paw.fromUserId}}</small><br/>
         Content : {{paw.content}} <br/>
@@ -15,6 +14,7 @@
             <input type="text" placeholder="Your Comment ..." name="comment" >
             <button type="submit" class="btn btn-outline-primary">Comment</button>
         </form>
+        {% if all_comments %}
         <strong> Comment :</strong><br/>
         {% for comment in all_comments%}
             {% if comment.toPawsId.id == paw.id%}
@@ -22,6 +22,11 @@
                 {{comment.comment_content}} <br/>
             {%endif%}
         {%endfor%}
+        {% endif%}
+        <form action=" {% url 'removePaws' paw.id %} " method="POST">
+            {%csrf_token%}
+        <input type="submit" class="btn btn-danger" value='Remove This Paws'>
+        </form>
      </li>
      {%endfor %}
     </ul>

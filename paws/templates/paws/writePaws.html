@@ -1,5 +1,12 @@
 {%extends 'paws/menu.html'%}
 {% block content %}
+
+{% if message%}
+<p style="color:green">{{message}}</p>
+{%endif%}
+{%if error%}
+<p style="color:red">{{error}}</p>
+{%endif%}
 <form action = " {% url 'writePaws' %}" method="POST">
         {%csrf_token%}
           <div class="form-group">

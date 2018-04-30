@@ -1,0 +1,33 @@
+{% extends 'paws/menu.html'%}
+{%block content %}
+    {% if paws %}
+     <ul>
+     {%  for paw in paws %}
+     <li>
+        Title : {{ paw.toPawsId.title}} <br/> <small> Author by: {{paw.toPawsId.fromUserId}}</small><br/>
+        Content : {{paw.toPawsId.content}} <br/>
+        <strong>Number of Likes :</strong> {{paw.toPawsId.number_of_likes}}
+        <form action= " {% url 'followUp' %}" method="POST">
+            {%csrf_token%}
+            <input type="hidden" name='paws_id' value={{paw.toPawsId_id}}>
+            <input type="text" placeholder="Your Comment ..." name="comment" >
+            <input type="submit" class="btn btn-outline-primary" name="comment_btn" value="Comment">
+            <input type="submit" class="btn btn-warning" name="unfollow_btn" value="UnFollow">
+            <input type="submit" class="btn btn-info" name="like_btn" value="Like">
+        </form>
+        <strong> Comment :</strong><br/>
+        {% if comments%}
+        {% for comment in comments%}
+            {% if comment.toPawsId.id == paw.toPawsId.id%}
+               <strong>{{comment.fromUserId}} : </strong> 
+                {{comment.comment_content}} <br/>
+            {%endif%}
+        {%endfor%}
+        {%endif%}
+     </li>
+     {%endfor %}
+    </ul>
+{%else%}
+    <p> There is no Paws</p>
+{%endif%}
+{%endblock%}
